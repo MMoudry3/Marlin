@@ -551,7 +551,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN FAN1_PIN
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -563,7 +563,7 @@
 #define COOLER_AUTO_FAN_PIN -1
 #define COOLER_FAN_PIN -1
 
-#define EXTRUDER_AUTO_FAN_TEMPERATURE 50
+#define EXTRUDER_AUTO_FAN_TEMPERATURE 40
 #define EXTRUDER_AUTO_FAN_SPEED 255   // 255 == full speed
 #define CHAMBER_AUTO_FAN_TEMPERATURE 30
 #define CHAMBER_AUTO_FAN_SPEED 255
@@ -1845,10 +1845,10 @@
 
   //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-  //#define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+  #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
     //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
-    //#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
+    #define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
   #endif
 #endif
 
@@ -1922,8 +1922,10 @@
   // Override the mesh area if the automatic (max) area is too large
   #define MESH_MIN_X MESH_INSET
   #define MESH_MIN_Y MESH_INSET
-  #define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
-  #define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
+  //#define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
+  //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
+  #define MESH_MAX_X X_BED_SIZE - ((NOZZLE_TO_PROBE_OFFSET_X * -1) + MESH_INSET)
+  #define MESH_MAX_Y Y_BED_SIZE - ((NOZZLE_TO_PROBE_OFFSET_Y * -1) + MESH_INSET)
 #endif
 
 #if BOTH(AUTO_BED_LEVELING_UBL, EEPROM_SETTINGS)
@@ -2905,9 +2907,9 @@
 
   #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY  130
+    #define X_STALL_SENSITIVITY  136
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    #define Y_STALL_SENSITIVITY  130
+    #define Y_STALL_SENSITIVITY  139
     #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  8
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY

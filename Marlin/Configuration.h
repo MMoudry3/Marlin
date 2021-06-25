@@ -1160,7 +1160,9 @@
  *     O-- FRONT --+
  */
 // Note on Creality Ender-5 Plus: Z offset must be adjusted (M851) every time once the probe has been loosen/unmounted.
-#define NOZZLE_TO_PROBE_OFFSET { -64, -1, -2.5 }
+#define NOZZLE_TO_PROBE_OFFSET_X -64
+#define NOZZLE_TO_PROBE_OFFSET_Y -2
+#define NOZZLE_TO_PROBE_OFFSET { NOZZLE_TO_PROBE_OFFSET_X, NOZZLE_TO_PROBE_OFFSET_Y, -1.93 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1229,15 +1231,15 @@
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
 #define Z_CLEARANCE_DEPLOY_PROBE     5 // Z Clearance for Deploy/Stow
-#define Z_CLEARANCE_BETWEEN_PROBES   2 // Z Clearance between probe points
-#define Z_CLEARANCE_MULTI_PROBE      1 // Z Clearance between multiple probes
+#define Z_CLEARANCE_BETWEEN_PROBES   3 // Z Clearance between probe points
+#define Z_CLEARANCE_MULTI_PROBE      2 // Z Clearance between multiple probes
 #define Z_AFTER_PROBING Z_AFTER_HOMING // Z position after probing is done
 
 #define Z_PROBE_LOW_POINT           -2 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
-#define Z_PROBE_OFFSET_RANGE_MIN -8
-#define Z_PROBE_OFFSET_RANGE_MAX 20
+#define Z_PROBE_OFFSET_RANGE_MIN -4
+#define Z_PROBE_OFFSET_RANGE_MAX 5
 
 // Enable the M48 repeatability test to test probe accuracy
 #define Z_MIN_PROBE_REPEATABILITY_TEST
@@ -1525,8 +1527,8 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-#define RESTORE_LEVELING_AFTER_G28
-//#define ENABLE_LEVELING_AFTER_G28
+//#define RESTORE_LEVELING_AFTER_G28
+#define ENABLE_LEVELING_AFTER_G28
 
 /**
  * Auto-leveling needs preheating
@@ -1838,13 +1840,13 @@
 #define PREHEAT_1_TEMP_HOTEND 195
 #define PREHEAT_1_TEMP_BED     60
 #define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED   100 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "ABS"
 #define PREHEAT_2_TEMP_HOTEND 240
 #define PREHEAT_2_TEMP_BED    110
 #define PREHEAT_2_TEMP_CHAMBER 35
-#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_2_FAN_SPEED   100 // Value from 0 to 255
 
 /**
  * Nozzle Park
